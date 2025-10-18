@@ -1,0 +1,41 @@
+name: "Release"
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  tagged-release:
+    name: "ReleaseBuild"
+    runs-on: "ubuntu-latest"
+
+    permissions:
+      # required for all workflows
+      security-events: read
+      actions: write
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Build"
+        run: |
+          docker build -t bruttazz/apod-api:$tag .
+        working-directory: "."
+
+      - name: "Publish"
+        id: publish
+        run: |
+          docker login -u bruttazz -p "${{ secrets.DOCKER_HUB_TOKEN }}"
+          docker push bruttazz/apod-api:$tag
+        working-directory: "."
+
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+          gh release create "$tag" \
+              --title="$tag" \
+              --generate-notes
