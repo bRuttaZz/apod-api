@@ -16,19 +16,22 @@ jobs:
       actions: write
       contents: write
 
+    env:
+      TAG: ${{ github.ref_name }}
+
     steps:
       - uses: actions/checkout@v4
 
       - name: "Build"
         run: |
-          docker build -t bruttazz/apod-api:$tag .
+          docker build -t bruttazz/apod-api:$TAG .
         working-directory: "."
 
       - name: "Publish"
         id: publish
         run: |
           docker login -u bruttazz -p "${{ secrets.DOCKER_HUB_TOKEN }}"
-          docker push bruttazz/apod-api:$tag
+          docker push bruttazz/apod-api:$TAG
         working-directory: "."
 
       - name: Create Release
