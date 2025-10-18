@@ -17,5 +17,10 @@ curl http://127.0.0.1:8000/api/v1/apod/ | jq
 Env Vars:
 - `APOD_SITE_URL` (defaults: `http://www.star.ucl.ac.uk/~apod/apod/`, compatable with `https://apod.nasa.gov/apod/` (but the site is dead today))
 
+dockers:
+  - bruttazz/apod-api
+
+live-apis:
+  - apod.brutt.site/api/v1/apod
 
 All rights reserved to respective sites: [star.ucl](http://www.star.ucl.ac.uk/~apod/apod/) / [nasa](https://apod.nasa.gov/apod/)
