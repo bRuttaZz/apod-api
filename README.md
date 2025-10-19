@@ -33,7 +33,7 @@ curl http://localhost:8000/api/v1/apod.json -s | jq
 - `bruttazz/apod-api`
 
 ### Live Endpoints
-- (https://apod.brutt.site/api/v1/apod.json)[https://apod.brutt.site/api/v1/apod.json]
+- [https://apod.brutt.site/api/v1/apod.json](https://apod.brutt.site/api/v1/apod.json)
 
 ### Credits
 All rights reserved to respective sites: [star.ucl](http://www.star.ucl.ac.uk/~apod/apod/) / [nasa](https://apod.nasa.gov/apod/)
