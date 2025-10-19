@@ -12,7 +12,7 @@ help:	## Show all Makefile targets.
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[33m%-30s\033[0m %s\n", $$1, $$2}'
 
 test: $(DEV_CONTAINER_IMG)	## Run unit tests
-	@$(CONTAINER_CMD) run -it --rm -v ./src:/opt/app:ro -w /opt/app --entrypoint resty $(DEV_CONTAINER_IMG) tests.lua
+	@$(CONTAINER_CMD) run --rm -v ./src:/opt/app:ro -w /opt/app --entrypoint resty $(DEV_CONTAINER_IMG) tests.lua
 
 shell: $(DEV_CONTAINER_IMG)	## Get resty shell
 	@$(CONTAINER_CMD) run -it --rm -v ./src:/opt/app:ro -v ./var:/var/app/www -w /opt/app --entrypoint sh $(DEV_CONTAINER_IMG)
@@ -23,7 +23,7 @@ build:  ## Build prod
 	touch build
 
 run: build ## Run production docker build
-	- $(CONTAINER_CMD) run --rm -p $(PORT):8000 -e SERVICE_BASE_URL=http://localhost:8000 $(PROD_CONTAINER_IMG)
+	- $(CONTAINER_CMD) run -it --rm -p $(PORT):8000 -e SERVICE_BASE_URL=http://localhost:8000 $(PROD_CONTAINER_IMG)
 
 run-b: ## Build and run
 	$(RM) build
