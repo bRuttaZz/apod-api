@@ -11,7 +11,7 @@
 - Due to federal funding issues it's down from 1st Oct 2025
 - Found [this service](http://www.star.ucl.ac.uk/~apod/apod/) hosted by **The UCL Astrophysics Group**. But they don't have an API endpoint.
 - This service, scrape cache and serve the same as an API endpoint giving source mentions.
-- BTW it's written in Openresty
+- BTW it's written in Openresty.
 
 ### API Endpoints
 
