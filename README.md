@@ -6,6 +6,13 @@
 
 **Inspired from** the activitypub bot, [@apod@reentry.codl.fr](https://reentry.codl.fr/@apod)
 
+## But why?
+- NASA used to host this [APOD page](https://apod.nasa.gov/apod/) together with an API service, to get the metadata. (had some API usage limits and API keys)
+- Due to federal funding issues it's down from 1st Oct 2025
+- Found [this service](http://www.star.ucl.ac.uk/~apod/apod/) hosted by **The UCL Astrophysics Group**. But they don't have an API endpoint.
+- This service, scrape cache and serve the same as an API endpoint giving source mentions.
+- BTW it's written in Openresty
+
 ### API Endpoints
 
 - GET `/api/v1/apod.json`
