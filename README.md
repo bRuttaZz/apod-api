@@ -13,6 +13,13 @@
 - This service, scrape cache and serve the same as an API endpoint giving source mentions.
 - BTW it's written in Openresty.
 
+- NASA previously hosted the [Astronomy Picture of the Day (APOD) page](https://apod.nasa.gov/apod/) along with an API service that provided metadata. (The API required keys and the demo-one had usage limits.)
+- As of October 1st, 2025, the official service is down due to federal funding issues.
+- I found an alternative mirror hosted by **The UCL Astrophysics Group**: [http://www.star.ucl.ac.uk/~apod/apod/](http://www.star.ucl.ac.uk/~apod/apod/). However, this mirror does not provide an API endpoint.
+- To work around this, created this service that scrapes, caches, and serves the same data via an API-like interface, including source attributions.
+- BTW, this service is built with **OpenResty**.
+
+
 ### API Endpoints
 
 - GET `/api/v1/apod.json`
