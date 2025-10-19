@@ -23,7 +23,7 @@ build:  ## Build prod
 	touch build
 
 run: build ## Run production docker build
-	- $(CONTAINER_CMD) run -it --rm -p $(PORT):8000 -e SERVICE_BASE_URL=http://localhost:8000 $(PROD_CONTAINER_IMG)
+	- $(CONTAINER_CMD) run --rm -p $(PORT):8000 -e SERVICE_BASE_URL=http://localhost:8000 $(PROD_CONTAINER_IMG)
 
 run-b: ## Build and run
 	$(RM) build
