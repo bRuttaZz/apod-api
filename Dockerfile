@@ -1,10 +1,20 @@
-FROM python:3.13-alpine
+FROM openresty/openresty:1.21.4.1-0-alpine
 
-COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+RUN apk add --no-cache perl curl
+RUN opm get ledgetech/lua-resty-http
 
-WORKDIR /opt/app
-COPY server.py server.py
+RUN apk del perl curl
 
-ENTRYPOINT ["python3", "-m", "uvicorn", "server:app", "--host", "0.0.0.0"]
-CMD ["--port", "8000", "--workers", "2"]
+RUN mkdir -p /var/app/www \
+    && chmod 777 -R /var/app/www \
+    && mkdir -p /var/logs/openresty \
+    && ln -sf /dev/stdout /var/logs/openresty/error.log \
+    && ln -sf /dev/stderr /var/logs/openresty/access.log
+
+ENV WWW_DIR=/var/app/www
+
+
+COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
+COPY src /opt/app/src
+
+EXPOSE 8000

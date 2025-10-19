@@ -1,0 +1,3 @@
+[submodule "src/deps/lua-htmlparser"]
+	path = src/deps/lua-htmlparser
+	url = https://github.com/msva/lua-htmlparser

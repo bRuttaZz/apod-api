@@ -1,0 +1,8 @@
+FROM openresty/openresty:1.21.4.1-0-alpine
+
+RUN apk add perl curl
+RUN opm get ledgetech/lua-resty-http
+
+RUN mkdir -p /var/app/www
+ENV WWW_DIR=/var/app/www
+ENV LOCAL_ENV=true

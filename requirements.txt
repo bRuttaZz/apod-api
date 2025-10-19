@@ -1,5 +1,0 @@
-sqlalchemy[asyncio]>=2.0.44
-aiosqlite>=0.21.0
-httpx>=0.28.1
-selectolax>=0.4.0
-uvicorn>=0.37.0
