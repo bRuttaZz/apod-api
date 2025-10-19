@@ -36,6 +36,7 @@ curl http://localhost:8000/api/v1/apod.json -s | jq
 - `SERVICE_BASE_URL` (defaults to empty string, eg: `http://localhost:8000` )
 - `APOD_PAGE_MAX_SIZE` (defaults to 50kb) -- to save your server
 - `APOD_IMG_MAX_SIZE` (defaults to 10Mb) -- to save your server
+- `REFRESH_AFTER_HR` (defaults to 2) -- period to refresh the cache
 
 ### Pre-built docker images:
 - `bruttazz/apod-api`

@@ -190,7 +190,7 @@ function _apod_info_generator.extract()
 
     -- write info
     info.img = settings.SERVICE_BASE_URL .. settings.API_PREFIX .. img_name
-    info.date = os.date("%Y-%m-%d")
+    info.date = os.date("%Y-%m-%d-%H-%M-%S")
     info.source = settings.APOD_PAGE_URL
     info.credits = settings.APOD_HOST
 
