@@ -1,5 +1,7 @@
 local _settings = {
-    APOD_PAGE_URL = os.getenv("APOD_PAGE_URL") or "http://www.star.ucl.ac.uk/~apod/apod/",
+    APOD_PAGE_URL = os.getenv("APOD_PAGE_URL") or
+        "https://apod.nasa.gov/apod/" or
+        "http://www.star.ucl.ac.uk/~apod/apod/",
     SERVICE_BASE_URL = os.getenv("SERVICE_BASE_URL") or "",                   -- without trailing slash
 
     APOD_PAGE_MAX_SIZE = tonumber(os.getenv("APOD_PAGE_MAX_SIZE")) or 50000,  -- average ~4397

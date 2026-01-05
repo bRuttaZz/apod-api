@@ -23,6 +23,7 @@ ffi.cdef [[
 local function _get_url_content(url)
     local httpc = http.new()
     local res, err = httpc:request_uri(url, {
+        ssl_verify = false,
         headers = {
             ["User-Agent"] = "Mozilla/5.0 (X11; Linux x86_64; rv:144.0) Gecko/20100101 Firefox/144.0",
             ["Host"] = url:match("^%w+://([^/]+)")
