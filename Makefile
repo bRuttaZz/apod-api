@@ -1,4 +1,4 @@
-VERSION ?= v0.0.1
+VERSION ?= v1.0.3
 
 PORT ?= 8000
 
@@ -19,8 +19,22 @@ shell: $(DEV_CONTAINER_IMG)	## Get resty shell
 
 build:  ## Build prod
 	$(CONTAINER_CMD) rmi $(PROD_CONTAINER_IMG) || true
-	$(CONTAINER_CMD) build -f Dockerfile -t $(PROD_CONTAINER_IMG) .
+	@echo "Building x86_64 images----------"
+	$(CONTAINER_CMD) build -f Dockerfile --platform linux/amd64 -t $(PROD_CONTAINER_IMG)-amd64 .
+	@echo "Building arm64 images----------"
+	$(CONTAINER_CMD) build -f Dockerfile --platform linux/arm64 -t $(PROD_CONTAINER_IMG)-arm64 .
 	touch build
+
+push: build ## Push image
+	@echo "Pushing buids"
+	$(CONTAINER_CMD) push $(PROD_CONTAINER_IMG)-amd64
+	$(CONTAINER_CMD) push $(PROD_CONTAINER_IMG)-arm64
+
+	@echo "Building image manifest list"
+	$(CONTAINER_CMD) manifest create $(PROD_CONTAINER_IMG) $(PROD_CONTAINER_IMG)-amd64 $(PROD_CONTAINER_IMG)-arm64
+	$(CONTAINER_CMD) manifest annotate --arch amd64 $(PROD_CONTAINER_IMG) $(PROD_CONTAINER_IMG)-amd64
+	$(CONTAINER_CMD) manifest annotate --arch arm64 $(PROD_CONTAINER_IMG) $(PROD_CONTAINER_IMG)-arm64
+	$(CONTAINER_CMD) manifest push $(PROD_CONTAINER_IMG)
 
 run: build ## Run production docker build
 	- $(CONTAINER_CMD) run -it --rm -p $(PORT):8000 -e SERVICE_BASE_URL=http://localhost:8000 $(PROD_CONTAINER_IMG)
